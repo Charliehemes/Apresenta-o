@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infográfico: Tendências da Indústria de Rações com AGPR5</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- 
+        Plano do Infográfico:
+        Tema: A Evolução das Operações em Fábricas de Rações: Dos Desafios Manuais à Excelência Automatizada com AGPR5.
+
+        Seções:
+        1. Introdução: O Cenário Atual e a Necessidade de Modernização.
+        2. Desafios Comuns em Fábricas Tradicionais: Ineficiência, Falta de Controle, Custos Elevados.
+        3. A Solução AGPR5: Tecnologia e Inovação para a Indústria de Rações.
+           - Foco nos pilares: Automação (GEMBA MES MILL), Equipamentos Elétricos Modernos, Instalação Especializada.
+        4. GEMBA MES MILL em Detalhes: O Coração da Operação Inteligente.
+           - Módulos chave: SCADA, Recepção, Dosagem/Mistura, Relatórios, Peletização.
+        5. Impacto e Benefícios da Modernização (Tendências de Mercado):
+           - Aumento de Produtividade, Redução de Erros, Melhoria na Qualidade, Rastreabilidade, Segurança.
+        6. Componentes Tecnológicos de Ponta: A Base da Confiança.
+           - Hardware (Siemens CLP), Software (Elipse E3), Normas (ABNT).
+        7. AGPR5: Parceria Estratégica para o Futuro.
+           - Treinamento, Comissionamento, Suporte, Garantias.
+        8. Conclusão: O Futuro é Automatizado e Eficiente.
+
+        Escolhas de Visualização (Confirmando SEM SVG e SEM MERMAID JS):
+        - Seção 2 (Desafios): Lista com Ícones (HTML/CSS + Unicode) para representar problemas.
+        - Seção 3 (Solução AGPR5): Diagrama de Fluxo Conceitual (HTML/CSS com Tailwind) mostrando os pilares da AGPR5.
+        - Seção 4 (GEMBA MES MILL): Cards (HTML/CSS com Tailwind) para cada módulo principal, com ícones Unicode.
+        - Seção 5 (Impacto/Benefícios):
+            - Gráficos de Barras (Chart.js) para "Aumento de Produtividade (%)" e "Redução de Perdas (%)" (com dados ilustrativos, já que o relatório é uma proposta).
+            - "Grandes Números" (HTML/CSS) para Rastreabilidade (ex: "90+ Dias de Histórico") e Segurança.
+        - Seção 6 (Componentes Tecnológicos): Lista estilizada (HTML/CSS).
+        - Seção 7 (Parceria): Linha do Tempo simplificada (HTML/CSS com Tailwind) do relacionamento com o cliente.
+
+        Paleta de Cores Escolhida: "Azuis Brilhantes e Amarelo Vibrante"
+        - Primária (Azul Principal): #0D6EFD
+        - Secundária (Azul Ciano/Teal): #0DCAF0
+        - Destaque (Amarelo): #FFC107
+        - Fundo Principal: #FFFFFF
+        - Fundo Seção Alternativa: #F8F9FA (Cinza Claro)
+        - Texto Principal: #212529 (Cinza Escuro/Preto)
+        - Texto Secundário: #495057
+
+        Confirmação: NEM MERMAID JS NEM SVG foram utilizados neste infográfico. Todos os diagramas e ícones são HTML/CSS ou caracteres Unicode.
+    -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #212529;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 350px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+                max-height: 400px;
+            }
+        }
+        .stat-card {
+            background-color: #FFFFFF;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            padding: 1.5rem;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #0D6EFD; /* Azul Primário */
+        }
+        .stat-label {
+            font-size: 1rem;
+            color: #495057; /* Texto Secundário */
+            margin-top: 0.5rem;
+        }
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #0A4D68; /* Um azul mais escuro para títulos, ajustado da paleta original */
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        .section-subtitle {
+            font-size: 1.125rem;
+            color: #495057;
+            margin-bottom: 2.5rem;
+            text-align: center;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .card {
+            background-color: white;
+            border-radius: 0.75rem;
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+            padding: 1.5rem; /* p-6 */
+            margin-bottom: 1.5rem; /* mb-6 */
+            transition: all 0.3s ease-in-out;
+        }
+        .card:hover {
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04);
+            transform: translateY(-4px);
+        }
+        .icon-placeholder {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #0DCAF0; /* Azul Ciano/Teal */
+        }
+        .flowchart-step {
+            background-color: #E0F7FA; /* Light Cyan Background */
+            border: 2px solid #0DCAF0; /* Cyan Border */
+            color: #0A4D68; /* Dark Blue Text */
+            padding: 1rem;
+            border-radius: 0.5rem;
+            text-align: center;
+            font-weight: 600;
+            position: relative;
+        }
+        .flowchart-arrow {
+            font-size: 2rem;
+            color: #0DCAF0; /* Cyan Arrow */
+            margin: 0 0.5rem;
+            align-self: center;
+        }
+        .timeline-item {
+            position: relative;
+            padding-bottom: 2rem;
+            padding-left: 2.5rem; 
+            border-left: 3px solid #0DCAF0; /* Azul Ciano/Teal */
+        }
+        .timeline-dot {
+            position: absolute;
+            left: -0.60rem; 
+            top: 0;
+            height: 1.25rem;
+            width: 1.25rem;
+            background-color: #FFC107; /* Amarelo Destaque */
+            border-radius: 50%;
+            border: 3px solid white;
+        }
+        .sticky-nav {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background-color: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+
+    <header class="bg-gradient-to-r from-[#0D6EFD] to-[#0DCAF0] text-white py-12 px-4 sm:px-6 lg:px-8">
+        <div class="container mx-auto text-center">
+            <h1 class="text-4xl font-bold mb-4">Transformando a Indústria de Rações</h1>
+            <p class="text-xl max-w-3xl mx-auto">Como a tecnologia e automação da AGPR5 estão moldando o futuro da produção eficiente e inteligente.</p>
+        </div>
+    </header>
+
+    <nav class="sticky-nav py-3">
+        <div class="container mx-auto px-4">
+            <ul class="flex flex-wrap justify-center space-x-4 sm:space-x-6 text-sm font-medium">
+                <li><a href="#desafios" class="text-gray-700 hover:text-[#0D6EFD] transition-colors">Desafios Atuais</a></li>
+                <li><a href="#solucao_agpr5" class="text-gray-700 hover:text-[#0D6EFD] transition-colors">Solução AGPR5</a></li>
+                <li><a href="#gemba_mes" class="text-gray-700 hover:text-[#0D6EFD] transition-colors">GEMBA MES</a></li>
+                <li><a href="#impacto" class="text-gray-700 hover:text-[#0D6EFD] transition-colors">Impacto e Benefícios</a></li>
+                <li><a href="#tecnologia" class="text-gray-700 hover:text-[#0D6EFD] transition-colors">Tecnologia</a></li>
+                <li><a href="#parceria" class="text-gray-700 hover:text-[#0D6EFD] transition-colors">Parceria</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container mx-auto p-4 sm:p-6 lg:p-8">
+
+        <section id="introducao" class="my-12">
+            <h2 class="section-title">Modernização: A Chave para o Sucesso</h2>
+            <p class="section-subtitle">
+                A indústria de rações enfrenta uma demanda crescente por eficiência, qualidade e rastreabilidade. Processos manuais e sistemas obsoletos limitam o potencial de crescimento e lucratividade. A AGPR5 surge como um parceiro estratégico, oferecendo soluções de automação e engenharia que impulsionam a transformação digital neste setor vital. Este infográfico explora as tendências e os benefícios dessa modernização.
+            </p>
+        </section>
+
+        <section id="desafios" class="my-16 py-12 bg-[#F8F9FA] rounded-lg">
+            <h2 class="section-title">Desafios em Fábricas Tradicionais</h2>
+            <p class="section-subtitle">Muitas fábricas de rações ainda operam com métodos que geram gargalos e ineficiências. Identificar esses desafios é o primeiro passo para a evolução.</p>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto px-4">
+                <div class="card text-center">
+                    <div class="icon-placeholder">⚙️</div>
+                    <h3 class="text-xl font-semibold mb-2 text-[#0A4D68]">Processos Manuais Lentos</h3>
+                    <p class="text-gray-600">Dependência excessiva de mão de obra para tarefas repetitivas, resultando em baixa produtividade e maior propensão a erros.</p>
+                </div>
+                <div class="card text-center">
+                    <div class="icon-placeholder">📉</div>
+                    <h3 class="text-xl font-semibold mb-2 text-[#0A4D68]">Falta de Controle e Dados</h3>
+                    <p class="text-gray-600">Ausência de monitoramento em tempo real e dados precisos, dificultando a tomada de decisões e a otimização dos processos.</p>
+                </div>
+                <div class="card text-center">
+                    <div class="icon-placeholder">💸</div>
+                    <h3 class="text-xl font-semibold mb-2 text-[#0A4D68]">Custos Operacionais Elevados</h3>
+                    <p class="text-gray-600">Desperdício de matéria-prima, retrabalho, paradas não programadas e alto consumo de energia impactam negativamente a rentabilidade.</p>
+                </div>
+                <div class="card text-center lg:col-span-1 md:col-span-2">
+                    <div class="icon-placeholder">🔬</div>
+                    <h3 class="text-xl font-semibold mb-2 text-[#0A4D68]">Qualidade Inconsistente</h3>
+                    <p class="text-gray-600">Dificuldade em manter a uniformidade das fórmulas e a qualidade do produto final devido à falta de precisão nos processos.</p>
+                </div>
+                 <div class="card text-center">
+                    <div class="icon-placeholder">🔗</div>
+                    <h3 class="text-xl font-semibold mb-2 text-[#0A4D68]">Rastreabilidade Limitada</h3>
+                    <p class="text-gray-600">Incapacidade de rastrear lotes e insumos de forma eficiente, comprometendo a segurança alimentar e a conformidade.</p>
+                </div>
+                 <div class="card text-center">
+                    <div class="icon-placeholder">🛡️</div>
+                    <h3 class="text-xl font-semibold mb-2 text-[#0A4D68]">Riscos de Segurança</h3>
+                    <p class="text-gray-600">Ambientes de trabalho com poeira excessiva e equipamentos obsoletos podem apresentar riscos à saúde e segurança dos colaboradores.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="solucao_agpr5" class="my-16">
+            <h2 class="section-title">A Solução AGPR5: Engenharia e Automação Integradas</h2>
+            <p class="section-subtitle">A AGPR5 oferece um "retrofit" completo, modernizando fábricas de rações com tecnologia de ponta e um profundo conhecimento da indústria.</p>
+            <div class="bg-white p-6 rounded-lg shadow-lg">
+                <h3 class="text-2xl font-semibold text-center text-[#0A4D68] mb-6">Pilares da Transformação AGPR5</h3>
+                <div class="flex flex-col md:flex-row items-center justify-around space-y-4 md:space-y-0 md:space-x-4">
+                    <div class="flowchart-step md:w-1/4">Automação Inteligente<br/>(Software GEMBA MES MILL)</div>
+                    <div class="flowchart-arrow hidden md:block">➡️</div>
+                    <div class="flowchart-arrow block md:hidden text-center my-2">⬇️</div>
+                    <div class="flowchart-step md:w-1/4">Equipamentos Elétricos Modernos</div>
+                    <div class="flowchart-arrow hidden md:block">➡️</div>
+                     <div class="flowchart-arrow block md:hidden text-center my-2">⬇️</div>
+                    <div class="flowchart-step md:w-1/4">Instalação e Engenharia Especializada</div>
+                    <div class="flowchart-arrow hidden md:block">➡️</div>
+                     <div class="flowchart-arrow block md:hidden text-center my-2">⬇️</div>
+                    <div class="flowchart-step md:w-1/4">Suporte e Parceria Contínua</div>
+                </div>
+                <p class="mt-6 text-center text-gray-700">Essa abordagem integrada garante que cada aspecto da fábrica seja otimizado para máxima eficiência, controle e segurança.</p>
+            </div>
+        </section>
+
+        <section id="gemba_mes" class="my-16 py-12 bg-[#F8F9FA] rounded-lg">
+            <h2 class="section-title">GEMBA MES MILL: O Cérebro da Operação</h2>
+            <p class="section-subtitle">O software de automação GEMBA MES MILL é a peça central da solução AGPR5, oferecendo controle total e visibilidade em tempo real de toda a planta.</p>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto px-4">
+                <div class="card">
+                    <div class="icon-placeholder">🖥️</div>
+                    <h3 class="text-xl font-semibold mb-2 text-[#0A4D68]">ST01-SCADA</h3>
+                    <p class="text-gray-600">Visualização completa do fluxo da fábrica, controle de equipamentos, parâmetros e monitoramento de produção em tempo real. Inclui registro de eventos e alarmes.</p>
+                </div>
+                <div class="card">
+                    <div class="icon-placeholder">🚚</div>
+                    <h3 class="text-xl font-semibold mb-2 text-[#0A4D68]">ST02-Recepção</h3>
+                    <p class="text-gray-600">Pré-agendamento de recebimentos, registro de ordens, partida e parada automáticas, e troca de silo de destino inteligente.</p>
+                </div>
+                <div class="card">
+                    <div class="icon-placeholder">⚖️</div>
+                    <h3 class="text-xl font-semibold mb-2 text-[#0A4D68]">ST03-Dosagem, Moagem e Mistura</h3>
+                    <p class="text-gray-600">Registro de tempos, controle preciso de equipamentos, interligação com sistemas gerenciais e verificação de movimentações para evitar erros.</p>
+                </div>
+                <div class="card">
+                    <div class="icon-placeholder">📦</div>
+                    <h3 class="text-xl font-semibold mb-2 text-[#0A4D68]">ST04/ST05-Expedição e Robô</h3>
+                    <p class="text-gray-600">Controle para evitar mistura de produtos, gestão de entrega de ração e carga de caminhão automatizada.</p>
+                </div>
+                <div class="card">
+                    <div class="icon-placeholder">📊</div>
+                    <h3 class="text-xl font-semibold mb-2 text-[#0A4D68]">ST08-Relatórios</h3>
+                    <p class="text-gray-600">Acesso via web a relatórios detalhados de bateladas, recebimentos, transilagens, eficiência, consumo de matérias-primas e parâmetros.</p>
+                </div>
+                <div class="card">
+                    <div class="icon-placeholder">🔥</div>
+                    <h3 class="text-xl font-semibold mb-2 text-[#0A4D68]">OP13-Peletização</h3>
+                    <p class="text-gray-600">Dosagem pós-pellet, registro de dados de peletização (temperatura, pressão, corrente) e controle automático do processo.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="impacto" class="my-16">
+            <h2 class="section-title">Impacto da Modernização: Tendências de Mercado</h2>
+            <p class="section-subtitle">A adoção de tecnologias como as oferecidas pela AGPR5 reflete tendências claras na indústria: busca por maior produtividade, qualidade e sustentabilidade.</p>
+            <div class="grid md:grid-cols-2 gap-8 items-center">
+                <div class="card">
+                    <h3 class="text-xl font-semibold text-center mb-4 text-[#0A4D68]">Aumento de Produtividade e Redução de Perdas (Ilustrativo)</h3>
+                    <div class="chart-container">
+                        <canvas id="produtividadePerdasChart"></canvas>
+                    </div>
+                    <p class="text-sm text-gray-500 mt-2 text-center">Dados ilustrativos representando o potencial de melhoria.</p>
+                </div>
+                <div class="space-y-6">
+                    <div class="stat-card">
+                        <div class="stat-number">90+</div>
+                        <div class="stat-label">Dias de Histórico para Rastreabilidade Completa</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="icon-placeholder mb-2">✅</div>
+                        <div class="stat-label text-lg font-semibold text-[#0A4D68]">Qualidade Assegurada</div>
+                        <p class="text-sm text-gray-600">Processos controlados para garantir a consistência e o padrão das rações.</p>
+                    </div>
+                    <div class="stat-card">
+                         <div class="icon-placeholder mb-2">👷</div>
+                        <div class="stat-label text-lg font-semibold text-[#0A4D68]">Segurança Aprimorada</div>
+                        <p class="text-sm text-gray-600">Redução de riscos operacionais e um ambiente de trabalho mais seguro para os colaboradores.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="tecnologia" class="my-16 py-12 bg-[#F8F9FA] rounded-lg">
+            <h2 class="section-title">Tecnologia de Ponta: A Base da Confiança</h2>
+            <p class="section-subtitle">A AGPR5 utiliza componentes e softwares de fornecedores renomados, garantindo robustez, confiabilidade e conformidade com as normas mais exigentes.</p>
+            <div class="max-w-3xl mx-auto bg-white p-8 rounded-lg shadow-xl">
+                <ul class="space-y-4">
+                    <li class="flex items-center">
+                        <span class="text-2xl mr-3 text-[#0D6EFD]">🔌</span>
+                        <div>
+                            <h4 class="font-semibold text-lg text-[#0A4D68]">Hardware de CLP e Remotas:</h4>
+                            <p class="text-gray-700">Principalmente Siemens (ex: CPU 1513SP 1PN, ET200SP) e Schneider, líderes em automação industrial.</p>
+                        </div>
+                    </li>
+                    <li class="flex items-center">
+                        <span class="text-2xl mr-3 text-[#0D6EFD]">💻</span>
+                        <div>
+                            <h4 class="font-semibold text-lg text-[#0A4D68]">Software de Supervisão:</h4>
+                            <p class="text-gray-700">Elipse E3, OA, além do sistema proprietário GEMBA MES MILL, para controle e visualização avançada.</p>
+                        </div>
+                    </li>
+                    <li class="flex items-center">
+                        <span class="text-2xl mr-3 text-[#0D6EFD]">⚙️</span>
+                        <div>
+                            <h4 class="font-semibold text-lg text-[#0A4D68]">Estações de Supervisão:</h4>
+                            <p class="text-gray-700">Microcomputadores Dell de alta performance para servidores e estações de operação.</p>
+                        </div>
+                    </li>
+                    <li class="flex items-center">
+                        <span class="text-2xl mr-3 text-[#0D6EFD]">📜</span>
+                        <div>
+                            <h4 class="font-semibold text-lg text-[#0A4D68]">Conformidade com Normas:</h4>
+                            <p class="text-gray-700">Projetos e instalações seguindo ABNT NBR 5410, NR 10 e NR 12, assegurando segurança e qualidade.</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="parceria" class="my-16">
+            <h2 class="section-title">AGPR5: Mais que um Fornecedor, um Parceiro Estratégico</h2>
+            <p class="section-subtitle">O compromisso da AGPR5 vai além da entrega da solução, englobando um ciclo completo de suporte para garantir o sucesso a longo prazo do cliente.</p>
+            <div class="max-w-2xl mx-auto">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <h4 class="font-semibold text-lg mb-1 text-[#0A4D68]">1. Contrato e Planejamento</h4>
+                    <p class="text-gray-700 text-sm">Definição do escopo, cronograma e metas do projeto de retrofit.</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <h4 class="font-semibold text-lg mb-1 text-[#0A4D68]">2. Desenvolvimento e Instalação</h4>
+                    <p class="text-gray-700 text-sm">Implementação das soluções de automação e elétricas por equipe especializada.</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <h4 class="font-semibold text-lg mb-1 text-[#0A4D68]">3. Treinamento Operacional</h4>
+                    <p class="text-gray-700 text-sm">Capacitação da equipe do cliente para operar os novos sistemas com eficiência e segurança (Cortesia AGPR5 para até 5 operadores no exemplo da COOPATRIGO).</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <h4 class="font-semibold text-lg mb-1 text-[#0A4D68]">4. Posta em Marcha e Acompanhamento</h4>
+                    <p class="text-gray-700 text-sm">Comissionamento do sistema e suporte técnico durante o início da operação para ajustes finos.</p>
+                </div>
+                <div class="timeline-item" style="border-left: 3px solid transparent;"> <div class="timeline-dot"></div>
+                    <h4 class="font-semibold text-lg mb-1 text-[#0A4D68]">5. Garantia e Suporte Contínuo</h4>
+                    <p class="text-gray-700 text-sm">Garantia dos serviços e equipamentos, e disponibilidade para suporte técnico e futuras otimizações.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="conclusao" class="my-12 py-16 bg-gradient-to-r from-[#0D6EFD] to-[#0DCAF0] text-white rounded-lg">
+            <div class="container mx-auto text-center px-4">
+                <h2 class="text-3xl font-bold mb-6">O Futuro da Produção de Rações é Agora!</h2>
+                <p class="text-lg mb-8 max-w-2xl mx-auto">A modernização não é apenas uma tendência, mas uma necessidade para fábricas que buscam competitividade, eficiência e sustentabilidade. A AGPR5 está pronta para ser sua parceira nesta jornada de transformação.</p>
+                <a href="mailto:comercial.br@agpr5.com" 
+                   class="bg-[#FFC107] text-[#212529] font-semibold py-3 px-8 rounded-lg text-lg hover:bg-yellow-400 transition-colors shadow-md">
+                   Entre em Contato e Re-imagine Sua Fábrica!
+                </a>
+                <p class="mt-6 text-sm">AGPR5: Re-imagine com Engenhosidade.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="text-center py-8 bg-gray-800 text-gray-400 text-sm">
+        <p>&copy; <span id="currentYear"></span> AGPR5. Todos os direitos reservados.</p>
+        <p>Infográfico ilustrativo baseado na Proposta Técnico-Comercial AGPR5.24.08.0944.R1.</p>
+    </footer>
+
+    <script>
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        function wrapText(text, maxLength) {
+            if (text.length <= maxLength) {
+                return text;
+            }
+            const words = text.split(' ');
+            const lines = [];
+            let currentLine = '';
+            words.forEach(word => {
+                if ((currentLine + word).length > maxLength && currentLine.length > 0) {
+                    lines.push(currentLine.trim());
+                    currentLine = word + ' ';
+                } else {
+                    currentLine += word + ' ';
+                }
+            });
+            lines.push(currentLine.trim());
+            return lines;
+        }
+        
+        const tooltipTitleCallback = (tooltipItems) => {
+            const item = tooltipItems[0];
+            let label = item.chart.data.labels[item.dataIndex];
+            if (Array.isArray(label)) {
+              return label.join(' ');
+            }
+            return label;
+        };
+
+        // Gráfico de Produtividade e Perdas
+        const ctxProdPerdas = document.getElementById('produtividadePerdasChart');
+        if (ctxProdPerdas) {
+            new Chart(ctxProdPerdas, {
+                type: 'bar',
+                data: {
+                    labels: [
+                        wrapText('Produtividade Operacional', 16), 
+                        wrapText('Perdas de Matéria-Prima', 16)
+                    ],
+                    datasets: [{
+                        label: 'Antes da Automação AGPR5',
+                        data: [65, 15], // Dados ilustrativos (Antes: Produtividade 65%, Perdas 15%)
+                        backgroundColor: '#FFC107', // Amarelo Destaque
+                        borderColor: '#EAA800',
+                        borderWidth: 1
+                    }, {
+                        label: 'Após Automação AGPR5 (Potencial)',
+                        data: [90, 5], // Dados ilustrativos (Depois: Produtividade 90%, Perdas 5%)
+                        backgroundColor: '#0D6EFD', // Azul Primário
+                        borderColor: '#0A58CA',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function(value) {
+                                    return value + '%';
+                                }
+                            }
+                        },
+                        x: {
+                            ticks: {
+                                font: {
+                                    size: 10
+                                }
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        tooltip: {
+                            callbacks: {
+                                title: tooltipTitleCallback
+                            }
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+
+</body>
+</html>
